@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register Account</title>
+    <link rel="stylesheet" href="Assing.css">
+</head>
+<body>
+    <div class="head">
+        <div class="h1">Register Your Information</div>
+    </div>
+    <div class="main">
+            <div class="label">
+               <h1>Register Account</h1> 
+            </div>
+                <label id="lusername" for="userName">User Name:</label>
+                <input placeholder="Username" class="username" type="text" id="userName"><br>
+                <Label id="ldob" for="dob">DOB:</Label>
+                <input class="dob" type="date" id="dob"><br>
+                <Label id="lsex" for="sex">Sex:</Label>
+                <input class="sex" type="radio" id="sex"><span class="Male">Male</span>
+                <input type="radio" id="sex"> <span class="Female">Female</span> <br>
+                <label id="lemail" for="email">Email:</label>
+                <input placeholder="Example@gmail.com" class="email" type="text" id="email"><br>
+                <label id="laddress" for="address">Address:</label>
+                <input class="address" type="text" id="address"><br>
+                <label id="lphone" for="phone">Mobile Phone:</label>
+                <input class="phone" type="text" id="phone"><br>
+                <label id="lmajor" for="major">Major:</label>
+                <input class="major" type="text" id="major"><br>
+                <button class="btn" onclick="AddData()">Add</button>
+                
+              
+        </div>
+    </div>
+    <div class="table">
+        <table id="Mytable"  border="1" >
+            <tr>
+                <th>User Name</th>
+                <th>Date</th>
+                <th>Sex</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>phone</th>
+                <th>Major</th>
+                <th>Action</th>
+            </tr>
+    
+        </table>
+    
+        <script>
+            //globle Varialble
+            let username = document.getElementById("userName");
+            let dob = document.getElementById("dob");
+            let sex = document.getElementById("sex");
+            let email = document.getElementById("email");
+            let address = document.getElementById("address");
+            let phone = document.getElementById("phone");
+            let major = document.getElementById("major");
+            let mytable = document.getElementById("Mytable");
+            let button  = document.querySelector("button");
+            let _row = null;
+    
+            function AddData() {  
+                //check for add new recode ro update data
+                if(button.innerHTML=="Add"){
+                    let row = mytable.insertRow();
+                    let col1 = row.insertCell();
+                    col1.innerHTML = username.value;
+                    let col2 = row.insertCell();
+                    col2.innerHTML = dob.value;
+                    let col3 = row.insertCell();
+                    col3.innerHTML = sex.value;
+                    let col4 = row.insertCell();
+                    col4.innerHTML = email.value;
+                    let col5 = row.insertCell();
+                    col5.innerHTML = address.value;
+                    let col6 = row.insertCell();
+                    col6.innerHTML = phone.value;
+                    let col7 = row.insertCell();
+                    col7.innerHTML = major.value;
+                    let col8 = row.insertCell();
+                    col8.innerHTML = "<span onclick='Update(this)'>Update</span> | <span onclick='Delete(this)'>Delete</span>";
+                  
+                }
+                else{
+                    _row.cells[0].innerHTML = username.value;
+                    _row.cells[1].innerHTML = dob.value;
+                    _row.cells[2].innerHTML = sex.value;
+                    _row.cells[3].innerHTML = email.value;
+                    _row.cells[4].innerHTML = address.value;
+                    _row.cells[5].innerHTML = phone.value;
+                    _row.cells[6].innerHTML = major.value;
+                    button.innerHTML ="Add"
+                }
+    
+    
+                
+                //clear
+                CelarAllText();
+            }
+    
+            //Delete Recode
+            function Delete(params) {            
+                _row = params.parentElement.parentElement; 
+                if(confirm("Are you want to delete?")){
+                    _row.remove();
+                }
+                
+            }
+            
+            //Update Recode
+            function Update(params){
+                _row = params.parentElement.parentElement;
+                username.value = _row.cells[0].innerHTML; 
+                dob.value = _row.cells[1].innerHTML;
+                sex.value = _row.cells[2].innerHTML;
+                email.value = _row.cells[3].innerHTML;
+                address.value = _row.cells[4].innerHTML;
+                phone.value = _row.cells[5].innerHTML;
+                major.value = _row.cells[6].innerHTML;
+                button.innerHTML = "Update";
+            }
+    
+            //add event Enter
+            document.body.addEventListener("keypress",(e)=>{
+                if(e.key=="Enter"){
+                    AddData();
+                }
+            });
+    
+            // clear text all textbox
+            function CelarAllText() {
+                username.value= null;
+                dob.value= null;
+                sex.value = null;
+                email.value= null;
+                address.value = null;
+                phone.value = null;
+                major.value =null;
+                username.focus();
+            }
+    
+            
+    
+    
+            
+    
+        </script>
+    </div>
+
+</body>
+</html>
